@@ -6,62 +6,52 @@ package Lab01_B;
  */
 /**
  *
- * @author John
+ * @author John Repository link:
+ * https://github.com/Johnnyboi9907/Lab-01-B-ProgramDev.git
  */
 import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("Step 2: ");
+        double inputScore;
+        GradedActivity grade = new GradedActivity();
         Scanner input = new Scanner(System.in);
+        System.out.println("Please insert the student's grade: ");
+        inputScore = input.nextDouble();
+        grade.setScore(inputScore);
+        System.out.println("The Letter grade is " + grade.getGrade(inputScore));
+        System.out.println("\n");
+
         System.out.print("How many questions are on the final exam? ");
-        int questions = input.nextInt();
+        int numberOfQ1 = input.nextInt();
         System.out.print("How many questions did the student miss? ");
-        int missed = input.nextInt();
-        System.out.println(new FinalExam(questions, missed));
+        int missedQ1 = input.nextInt();
+        System.out.println(new FinalExam(numberOfQ1, missedQ1).toString());
+        System.out.println("\n");
 
-        System.out.println("\nStep 3: ");
         System.out.print("How many questions are on the final exam? ");
-        questions = input.nextInt();
+        int numberOfQ2 = input.nextInt();
         System.out.print("How many questions did the student miss? ");
-        missed = input.nextInt();
-        System.out.print("What is the minimum passing score? ");
-        double minPassingScore = input.nextInt();
-        System.out.println(new PassFailExam(questions, missed, minPassingScore));
+        int missedQ2 = input.nextInt();
+        System.out.print("What is the passing score? ");
+        double passingScore = input.nextDouble();
+        System.out.println(new PassFailExam(numberOfQ2, missedQ2, passingScore).toString());
+        System.out.println("\n");
 
-        System.out.println("\nStep 4: ");
-        System.out.println("Term Paper:");
-        System.out.print("Grammar points: ");
-        double grammar = input.nextDouble();
-        System.out.print("Spelling points: ");
-        double spelling = input.nextDouble();
-        System.out.print("Length points: ");
-        double length = input.nextDouble();
-        System.out.print("Content points: ");
-        double content = input.nextDouble();
-        Essay e1 = new Essay();
-        e1.setScore(grammar, spelling, length, content);
-        System.out.println(e1.toString());
+        Essay essay = new Essay();
+        essay.setScore(25.0, 18.0, 20.0, 25.0);
+        System.out.println(essay);
+        System.out.println("\n");
 
-        System.out.println("\nStep 5:");
-        CourseGrades cG = new CourseGrades();
-        GradedActivity gA = new GradedActivity();
-        gA.setScore(85);
-        cG.setLab(gA);
-        PassFailExam pFE = new PassFailExam(10, 1, 70);
-        cG.setPassFailExam(pFE);
-        Essay e2 = new Essay();
-        e2.setScore(10, 20, 20, 20);
-        cG.setEssay(e2);
-        FinalExam fE = new FinalExam(50, 1);
-        cG.setFinalExam(fE);
-        System.out.println(cG);
+        CourseGrades course = new CourseGrades();
+        course.setEssay(essay);
+        course.setPassFailExam(new PassFailExam(numberOfQ2, missedQ2, passingScore));
+        course.setLab(grade);
+        course.setFinalExam(new FinalExam(numberOfQ1, missedQ1));
+        System.out.println(course);
 
-        System.out.println("\nStep 6:");
-        System.out.println(cG);
-        System.out.printf("Average Score: %.1f\nHighest Score: %.1f\nLowest Score: %.1f\n",
-                cG.getAverage(), cG.getHighest(), cG.getLowest());
+        System.out.printf("\nAverage Score: %.1f\nHighest Score: %.1f\nLowest Score: %.1f\n",
+                course.getAverage(), course.getHighest(), course.getLowest());
     }
 }
